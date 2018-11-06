@@ -1,0 +1,25 @@
+/*----------------------------
+**                           **
+**     THE APP FRAMEWORK     **
+**                           **
+----------------------------*/
+1- break down the app to components
+2- build a static version of the app.
+3- determine what should be statful.
+4- determine in which component where each peace of state should live.
+5- hard-code intitial states.
+6- add inversive data flow.
+7- add communication with the server.
+
+----------------------------
+          Problem			
+----------------------------
+||| what has to be done :
+    - need to update the state timer that has been updated.
+||| what I have : 
+    - I recieved the id of the updated timer 
+    - I recived the updated title and project from the timer
+||| process
+    - The state updated is done in this.setState()
+    - i have the problem with the format {timers: updated_timers} but this will override the existing state completely
+    - 
