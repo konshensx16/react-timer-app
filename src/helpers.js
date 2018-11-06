@@ -17,7 +17,20 @@ function pad(numberString, size){
   return padded;
 }
 export {millisecondsToString};
+/**
+ * @description takes the elapsed milliseconds and running since and returns the acurate timer state
+ * @param {ms} elapsedMs 
+ * @param {ms} runningSince 
+ */
+function elapsedTimer(elapsedMs, runningSince) {
+  const now = Date.now();
+  if(runningSince){
+    elapsedMs+= now - runningSince;
+  }
 
+  return millisecondsToString(elapsedMs);
+
+}
 function createNewTimer(newTimer) {
   
   if(newTimer.title  && newTimer.project ){
@@ -43,24 +56,8 @@ function updateTimer(timersList, updatedTimer){
   })
   return timersArray;
 }
-function startTimer(elapsedMilliseconds,runningSince, isRunning){
-  console.log(elapsedMilliseconds);
-  if(isRunning && runningSince) {
-    return elapsedMilliseconds += (Date.now() - runningSince);
-  }
-  return elapsedMilliseconds;
-};
-function timerElapsing(timersList,elapsing ,  timerId){
-  
-  let timersArray = timersList;
-  timersArray.forEach(item => {
-    if(item.id === timerId){
-      item.elapsed = elapsing;
-    }
-  })
-  return timersArray
-}
+
+
 export {createNewTimer}
 export {updateTimer};
-export {startTimer};
-export {timerElapsing};
+export {elapsedTimer};
