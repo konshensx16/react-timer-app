@@ -34,8 +34,8 @@ function elapsedTimer(elapsedMs, runningSince) {
 function createNewTimer(newTimer) {
   
   if(newTimer.title  && newTimer.project ){
-    newTimer.elapsed = '00000000';
-    newTimer.runningSince = Date.now();
+    newTimer.elapsed = 0;
+    newTimer.runningSince = null;
     
     return newTimer
   }

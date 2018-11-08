@@ -1,0 +1,35 @@
+/*----------------------------
+**                           **
+**     REACT METHODOLOGY     **
+**                           **
+----------------------------*/
+-----------------------------
+ 1) Break App Into Components			
+-----------------------------
+- we mapped out the component  structure of our app by examining the app's working UI. We then applied the (Single-Responsibility) principle so that each component had the minimal viable functionality.
+--------------------------------------
+	2) Build a Static Version Of The App		
+--------------------------------------
+- Our bottom-level (user-visible) component rendered HTML based on props passed down by the parents
+--------------------------------------
+  3) Determine What Should Be Statfull			
+--------------------------------------
+- We used a series of questions to deduce what data should be Statfull, this data was represented in our app as props.
+-----------------------------------------------------------------
+  4) Determine In Which Component Each Piece Of State Should Live			
+-----------------------------------------------------------------
+- we used and other series of questions to determine which component should own each peice of state, TimersDashboard owned timer state data ToggliableTimerForm and EditableTimer both owned state pertaining to whether render a TimerForm.
+-----------------------------
+  5) Hard-Code Initial States 			
+-----------------------------
+- We then initialized state-owners (state) properties  with hard-coded values.
+----------------------------
+  6) Add Inverse Data Flow			
+----------------------------
+- We added interactivity by decorating buttons with onClick handlers. These called functions
+that were passed in as props down the hierarchy from whichever component owned the
+relevant state being manipulated. 
+------------------------------
+  7) Add Server Communication			
+------------------------------
+- We will use Node.js Express framewrok to handle the requests through and API already built see (server.js).

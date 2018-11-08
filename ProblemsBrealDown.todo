@@ -22,4 +22,6 @@
 ||| process
     - The state updated is done in this.setState()
     - i have the problem with the format {timers: updated_timers} but this will override the existing state completely
-    - 
+    -
+    ...
+

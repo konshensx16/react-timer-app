@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {  millisecondsToString,
+import {  
           createNewTimer,
           updateTimer,
           elapsedTimer
@@ -138,9 +138,12 @@ class Timer extends Component{
     this.props.handleEditButton();
     e.preventDefault();
   }
+  handleDeleteTimer = (e) =>{
+    e.preventDefault();
+    this.props.onTimerDeleteClick(this.props.id);
+  }
   componentDidMount(){
-    this.forceUpdateInterval = setInterval(() => this.forceUpdate(),50);
-    // this.forceUpdate();
+    this.forceUpdateInterval = setInterval(() => this.forceUpdate(),60);
   }
   componentWillUnmount(){
     clearInterval(this.forceUpdateInterval);
@@ -153,10 +156,16 @@ class Timer extends Component{
   }
 
   render(){
-  
-      let humanTimerString = elapsedTimer(this.props.elapsed,this.props.runningSince)
-    
-    
+      let humanTimerString;
+      if(this.props.runningSince){
+         humanTimerString = elapsedTimer(this.props.elapsed,this.props.runningSince);
+         console.log(this.props.elapsed);
+         
+      }else{
+         humanTimerString = elapsedTimer(this.props.elapsed);
+
+      }
+          
     return(
       <div className="text-sm-center m-5" id={this.props.id}>
         <div className="card p-4 bg-dark text-light text-center">
@@ -181,7 +190,7 @@ class Timer extends Component{
           </div>
           <div className="edit-delete timer  text-right">
             <a href="edit" className="mx-2 text-success" onClick={this.handleEditButton} ><i className="fa fa-edit"></i></a>
-            <a href="delete" className="mx-2 text-danger"><i className="fa fa-trash"></i></a>
+            <a href="delete" className="mx-2 text-danger" onClick={this.handleDeleteTimer}><i className="fa fa-trash"></i></a>
           </div>
           <div className="card-footer">
           <TimerActionButton
@@ -245,6 +254,7 @@ class EditableTimer extends Component {
         elapsed={this.props.elapsed}
         runningSince={this.props.runningSince}
         handleEditButton = {this.handleEdit}
+        onTimerDeleteClick = {this.props.onTimerDeleteClick}
         onTimerStartClick = {this.props.onTimerStartClick}
         onTimerStopClick = {this.props.onTimerStopClick}
         />
@@ -267,6 +277,7 @@ class EditableTimerList extends Component{
         runningSince={item.runningSince}
         editorFormOpen={false}
         onFormSubmit = {this.props.onFormSubmit}
+        onTimerDeleteClick = {this.props.onTimerDeleteClick}
         onTimerStartClick = {this.props.onTimerStartClick}
         onTimerStopClick = {this.props.onTimerStopClick}
         />
@@ -311,6 +322,12 @@ class TimerDashborad extends Component {
       timers: this.state.timers.concat(createNewTimer(timer))
    })
    }
+   handleDeleteTimer = (timerId) => {
+     //TODO: DELETE TIMER
+    this.setState({
+      timers: this.state.timers.filter((timer) => (timer.id !== timerId))
+    })
+   }
    handleStartTimer = (timerId) => {
     const now = Date.now();
     this.setState({
@@ -351,6 +368,7 @@ class TimerDashborad extends Component {
              <EditableTimerList
              timers = {this.state.timers}
              onFormSubmit = {this.handleUpateTimer}
+             onTimerDeleteClick = {this.handleDeleteTimer}
              onTimerStartClick = {this.handleStartTimer}
              onTimerStopClick = {this.handleStopTimer}
              />
