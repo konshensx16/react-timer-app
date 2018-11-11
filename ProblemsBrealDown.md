@@ -29,7 +29,7 @@ __process__
 1. need to create a client function that uses Fetch API to "put" the updated data to the server
 1. the server side logic for updating the timer is already coded.
 **TODO: understand express server requests** 
-- [*] DONE.
+- [x] DONE.
 
 ###TASK: DELETE TIMER (backend)|	
 -------------------------------|	
