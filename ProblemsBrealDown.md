@@ -30,9 +30,10 @@ __process__
 1. the server side logic for updating the timer is already coded.
 **TODO: understand express server requests** 
 - [*] DONE.
+
 ###TASK: DELETE TIMER (backend)|	
 -------------------------------|	
 
 1. the logic for getting the timer ID to be deleted is already done.
-1. need to create a client function that calls Fetch API method to "delete" the cicked timer.
-1. the server side logic for deleting the timer is already coded.
+2. need to create a client function that calls Fetch API method to "delete" the cicked timer.
+3. the server side logic for deleting the timer is already coded.
