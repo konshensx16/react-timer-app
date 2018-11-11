@@ -22,7 +22,7 @@ __process__
     * i have the problem with the format {timers: updated_timers} but this will override the existing state completely
     ...
 
-### TASK: UPDATE TIMER (backend)|
+TASK: UPDATE TIMER (backend)    |
 --------------------------------|
 
 1. the logic for getting the updated data (title and/or project) along side with the timer ID is already done
@@ -31,7 +31,7 @@ __process__
 **TODO: understand express server requests** 
 - [x] DONE.
 
-### TASK: DELETE TIMER (backend)|	
+TASK: DELETE TIMER (backend)    |	
 --------------------------------|	
 
 1. the logic for getting the timer ID to be deleted is already done.
