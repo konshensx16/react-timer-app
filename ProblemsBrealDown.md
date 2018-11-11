@@ -23,7 +23,7 @@ __process__
     ...
 
 ### TASK: UPDATE TIMER (backend)|
--------------------------------|
+--------------------------------|
 
 1. the logic for getting the updated data (title and/or project) along side with the timer ID is already done
 1. need to create a client function that uses Fetch API to "put" the updated data to the server
@@ -31,8 +31,8 @@ __process__
 **TODO: understand express server requests** 
 - [x] DONE.
 
-###TASK: DELETE TIMER (backend)|	
--------------------------------|	
+### TASK: DELETE TIMER (backend)|	
+--------------------------------|	
 
 1. the logic for getting the timer ID to be deleted is already done.
 2. need to create a client function that calls Fetch API method to "delete" the cicked timer.
