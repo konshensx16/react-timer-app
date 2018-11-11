@@ -1,6 +1,6 @@
 
                            
-#THE APP FRAMEWORK     
+# THE APP FRAMEWORK     
                            
 1. break down the app to components
 1. build a static version of the app.
@@ -10,7 +10,7 @@
 1. add inversive data flow.
 1. add communication with the server.
 
-##Problem			
+## Problem			
 
 **what has to be done :**
     * need to update the state timer that has been updated.
@@ -22,7 +22,7 @@ __process__
     * i have the problem with the format {timers: updated_timers} but this will override the existing state completely
     ...
 
-###TASK: UPDATE TIMER (backend)|
+### TASK: UPDATE TIMER (backend)|
 -------------------------------|
 
 1. the logic for getting the updated data (title and/or project) along side with the timer ID is already done
