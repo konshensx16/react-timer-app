@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import {getTimers, newTimer, updateTimer, deleteTimer} from './client';
 import {  
-          createNewTimer,
-          updateTimer,
+          // updateTimer,
           elapsedTimer
         }
 from './helpers';
@@ -267,21 +267,21 @@ class EditableTimerList extends Component{
 
   render(){
     
-    const timerList = this.props.timers.map((item) =>( 
-       <EditableTimer 
-        key= {item.id}
-        id={item.id}
-        title={item.title}
-        project={item.project}
-        elapsed={item.elapsed}
-        runningSince={item.runningSince}
-        editorFormOpen={false}
-        onFormSubmit = {this.props.onFormSubmit}
-        onTimerDeleteClick = {this.props.onTimerDeleteClick}
-        onTimerStartClick = {this.props.onTimerStartClick}
-        onTimerStopClick = {this.props.onTimerStopClick}
-        />
-    ))
+       const timerList = this.props.timers.map((item) =>( 
+         <EditableTimer 
+          key= {item.id}
+          id={item.id}
+          title={item.title}
+          project={item.project}
+          elapsed={item.elapsed}
+          runningSince={item.runningSince}
+          editorFormOpen={false}
+          onFormSubmit = {this.props.onFormSubmit}
+          onTimerDeleteClick = {this.props.onTimerDeleteClick}
+          onTimerStartClick = {this.props.onTimerStartClick}
+          onTimerStopClick = {this.props.onTimerStopClick}
+          />
+      ))
          
 
     return(
@@ -293,40 +293,29 @@ class EditableTimerList extends Component{
 }
 class TimerDashborad extends Component {
   state = {
-    timers: [
-      {
-        id: uuid.v4(),
-        title: '200 push-ups',
-        project: 'workout',
-        elapsed: 8212931,
-        runningSince: null
-      },
-      {
-        id: uuid.v4(),
-        title: '4 hours code',
-        project: 'Learn React',
-        elapsed: 0,
-        runningSince: null
-      }
-    ]
+    timers: []
   }
   handleUpateTimer = (timer) => {
-    this.setState({
-      timers: updateTimer(this.state.timers,timer)
-    })
-    
+    // this.setState({
+    //   timers: updateTimer(this.state.timers,timer)
+    // })
+    updateTimer(timer);
   }
    handleCreateTimer = (timer) => {
     //TODO: Create new timer
-    this.setState({
-      timers: this.state.timers.concat(createNewTimer(timer))
-   })
+  //   this.setState({
+  //     timers: this.state.timers.concat(createNewTimer(timer))
+  //  })
+    newTimer(timer);
    }
    handleDeleteTimer = (timerId) => {
      //TODO: DELETE TIMER
-    this.setState({
-      timers: this.state.timers.filter((timer) => (timer.id !== timerId))
-    })
+    // this.setState({
+    //   timers: this.state.timers.filter((timer) => (timer.id !== timerId))
+    // })
+    deleteTimer({
+      id:timerId
+    });
    }
    handleStartTimer = (timerId) => {
     const now = Date.now();
@@ -344,6 +333,17 @@ class TimerDashborad extends Component {
       })
     })
    }
+   componentDidMount(){
+    this.loadTimersFromServer();
+    setInterval(this.loadTimersFromServer,5000);
+   }
+   loadTimersFromServer = () => {
+    getTimers((serverTimers) => (
+      this.setState({
+        timers: serverTimers
+      })
+    ))
+   }
    handleStopTimer =  (timerId) => {
     const now = Date.now();
     this.setState({
@@ -359,6 +359,8 @@ class TimerDashborad extends Component {
       })
     })
    }
+   //call the backend
+   
    render() {
     
     return (

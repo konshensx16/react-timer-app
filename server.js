@@ -7,9 +7,9 @@ const app = express();
 
 const DATA_FILE = path.join(__dirname, 'data.json');
 
-app.set('port', (process.env.PORT || 8080));
+app.set('port', (5000));
 
-// app.use('/api/timers/', express.static(path.join(__dirname, 'public')));
+// app.use('/api/timers/', express.static(path.join(__dirname, './client/public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -27,6 +27,7 @@ app.get('/api/timers', (req, res) => {
 app.post('/api/timers', (req, res) => {
   fs.readFile(DATA_FILE, (err, data) => {
     const timers = JSON.parse(data);
+    console.log(req.body);
     const newTimer = {
       title: req.body.title,
       project: req.body.project,
@@ -120,3 +121,14 @@ app.get('/molasses', (_, res) => {
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
+/*----------------------------
+  simple express server setup
+----------------------------*/
+/*const express = require('express');
+const app = express();
+const port = process.env.PORT || 5000;
+app.listen(port,() => console.log('listening on port '+port));
+
+app.get('/api/timers', (rea , resp ) => {
+  resp.send({express: "Server is Connected To React"})
+});*/

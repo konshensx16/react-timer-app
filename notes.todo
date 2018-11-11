@@ -33,3 +33,10 @@ relevant state being manipulated.
   7) Add Server Communication			
 ------------------------------
 - We will use Node.js Express framewrok to handle the requests through and API already built see (server.js).
+- !NOTE: to load the timers data froms server you need to call the API endpoint within the component (entering the URL even if the proxy in client/package.json is set up it will not return the timers data )
+- in src/client.js :
+                   -> we call the function getTimers() which returns an object returned by the HTTP GET method 
+                   -> getTimers() returns a promise wich we passe to the checkStatus() function to check if the request passed without and error and return the response 
+                   -> the parseJSON() function takes that response and returns the JavaScbript Obect and JSON Format
+                   -> the JSON data is passed to the callback success
+
