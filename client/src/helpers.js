@@ -58,6 +58,7 @@ function updateTimer(timersList, updatedTimer){
 }
 
 
-export {createNewTimer}
-export {updateTimer};
-export {elapsedTimer};
+export {createNewTimer,
+        updateTimer,
+        elapsedTimer
+}

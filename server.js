@@ -7,7 +7,7 @@ const app = express();
 
 const DATA_FILE = path.join(__dirname, 'data.json');
 
-app.set('port', (5000));
+app.set('port', process.env.PORT || 5000);
 
 // app.use('/api/timers/', express.static(path.join(__dirname, './client/public')));
 app.use(bodyParser.json());
@@ -43,39 +43,39 @@ app.post('/api/timers', (req, res) => {
   });
 });
 
-app.post('/api/timers/start', (req, res) => {
-  fs.readFile(DATA_FILE, (err, data) => {
-    const timers = JSON.parse(data);
-    timers.forEach((timer) => {
-      if (timer.id === req.body.id) {
-        timer.runningSince = req.body.start;
-      }
-    });
-    fs.writeFile(DATA_FILE, JSON.stringify(timers, null, 4), () => {
-      res.setHeader('Cache-Control', 'no-cache');
-      res.json({});
-      res.end();
-    });
-  });
-});
+// app.post('/api/timers/start', (req, res) => {
+//   fs.readFile(DATA_FILE, (err, data) => {
+//     const timers = JSON.parse(data);
+//     timers.forEach((timer) => {
+//       if (timer.id === req.body.id) {
+//         timer.runningSince = req.body.start;
+//       }
+//     });
+//     fs.writeFile(DATA_FILE, JSON.stringify(timers, null, 4), () => {
+//       res.setHeader('Cache-Control', 'no-cache');
+//       res.json({});
+//       res.end();
+//     });
+//   });
+// });
 
-app.post('/api/timers/stop', (req, res) => {
-  fs.readFile(DATA_FILE, (err, data) => {
-    const timers = JSON.parse(data);
-    timers.forEach((timer) => {
-      if (timer.id === req.body.id) {
-        const delta = req.body.stop - timer.runningSince;
-        timer.elapsed += delta;
-        timer.runningSince = null;
-      }
-    });
-    fs.writeFile(DATA_FILE, JSON.stringify(timers, null, 4), () => {
-      res.setHeader('Cache-Control', 'no-cache');
-      res.json({});
-      res.end();
-    });
-  });
-});
+// app.post('/api/timers/stop', (req, res) => {
+//   fs.readFile(DATA_FILE, (err, data) => {
+//     const timers = JSON.parse(data);
+//     timers.forEach((timer) => {
+//       if (timer.id === req.body.id) {
+//         const delta = req.body.stop - timer.runningSince;
+//         timer.elapsed += delta;
+//         timer.runningSince = null;
+//       }
+//     });
+//     fs.writeFile(DATA_FILE, JSON.stringify(timers, null, 4), () => {
+//       res.setHeader('Cache-Control', 'no-cache');
+//       res.json({});
+//       res.end();
+//     });
+//   });
+// });
 
 app.put('/api/timers', (req, res) => {
   fs.readFile(DATA_FILE, (err, data) => {
@@ -111,7 +111,40 @@ app.delete('/api/timers', (req, res) => {
     });
   });
 });
-
+app.post('/api/timers/start',(req, res) => {
+  
+  fs.readFile(DATA_FILE, (err, data) => {
+  const timers = JSON.parse(data);
+     timers.forEach(timer => {
+      if(req.body.id === timer.id){
+        timer.runningSince = req.body.start;
+      }
+    });
+  fs.writeFile(DATA_FILE, JSON.stringify(timers, null, 4), () => {
+    res.setHeader('Cache-Control', 'no-cache');
+    res.json({});
+    res.end();
+  })
+  })
+})
+app.post('/api/timers/stop',(req, res) => {
+  fs.readFile(DATA_FILE, (err, data) => {
+    const timers = JSON.parse(data);
+    
+      timers.forEach(timer => {
+        if(req.body.id === timer.id){
+        const delta = req.body.stop - timer.runningSince;      
+        timer.elapsed +=  delta;
+        timer.runningSince = null;
+      }
+    });
+    fs.writeFile(DATA_FILE, JSON.stringify(timers, null, 4) , () => {
+      res.setHeader('Cache-Control' ,'no-cache');
+      res.json({});
+      res.end();
+    })
+  })
+})
 app.get('/molasses', (_, res) => {
   setTimeout(() => {
     res.end();

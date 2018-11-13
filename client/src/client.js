@@ -9,10 +9,10 @@
     .then(parseJSON)
     .then(success)
   }
-  function newTimer(timer){
+  function newTimerClient(timer) {
     // console.log(timer);
     
-    return fetch('api/timers',{
+    return fetch('/api/timers',{
       method: 'POST',
       body: JSON.stringify(timer),
       headers:{
@@ -21,8 +21,8 @@
     })
     .then(checkStatus)
   }
-  function updateTimer(timer){
-    return fetch('api/timers',{
+  function updateTimerClient(timer){
+    return fetch('/api/timers',{
       method: 'PUT',
       body: JSON.stringify(timer),
       headers:{
@@ -30,10 +30,10 @@
       }
     }).then(checkStatus)
   }
-  function deleteTimer(timerId){
+  function deleteTimerClient(timerId){
     console.log(timerId);
     
-    return fetch('api/timers',{
+    return fetch('/api/timers',{
       method: 'DELETE',
       body: JSON.stringify(timerId),
       headers:{
@@ -41,6 +41,28 @@
         'Content-Type': 'application/json'
       }
     }).then(checkStatus)
+  }
+  function startTimerClient(timer){
+    return fetch('/api/timers/start',
+    {
+      method: 'POST',
+      body: JSON.stringify(timer),
+        headers:{
+          'Accept': 'Application/json',
+          'Content-Type': 'Application/json'
+        }
+    }
+    ).then(checkStatus);
+  }
+  function stopTimerClient(timer){
+    return fetch('/api/timers/stop',{
+      method: 'POST',
+      body: JSON.stringify(timer),
+      headers:{
+        'Accept': 'Application/json',
+        'Content-Type': 'Application/json'  
+      }
+    }).then(checkStatus);
   }
   function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -59,7 +81,9 @@
   }
 export {
         getTimers,
-        newTimer,
-        updateTimer,
-        deleteTimer
+        newTimerClient,
+        updateTimerClient,
+        deleteTimerClient,
+        startTimerClient,
+        stopTimerClient
       };

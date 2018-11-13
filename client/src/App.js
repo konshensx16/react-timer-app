@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import {getTimers, newTimer, updateTimer, deleteTimer} from './client';
+import {
+  getTimers,
+  newTimerClient,
+  updateTimerClient,
+  deleteTimerClient,
+  startTimerClient,
+  stopTimerClient
+} from './client';
 import {  
-          // updateTimer,
+          createNewTimer,
+          updateTimer,
           elapsedTimer
         }
 from './helpers';
@@ -296,42 +304,61 @@ class TimerDashborad extends Component {
     timers: []
   }
   handleUpateTimer = (timer) => {
-    // this.setState({
-    //   timers: updateTimer(this.state.timers,timer)
-    // })
-    updateTimer(timer);
+    this.setState({
+      timers: updateTimer(this.state.timers,timer)
+    })
+    updateTimerClient(timer);
   }
    handleCreateTimer = (timer) => {
     //TODO: Create new timer
-  //   this.setState({
-  //     timers: this.state.timers.concat(createNewTimer(timer))
-  //  })
-    newTimer(timer);
+    this.setState({
+      timers: this.state.timers.concat(createNewTimer(timer))
+   })
+    newTimerClient(timer);
    }
    handleDeleteTimer = (timerId) => {
      //TODO: DELETE TIMER
-    // this.setState({
-    //   timers: this.state.timers.filter((timer) => (timer.id !== timerId))
-    // })
-    deleteTimer({
+    this.setState({
+      timers: this.state.timers.filter((timer) => (timer.id !== timerId))
+    })
+    deleteTimerClient({
       id:timerId
     });
    }
    handleStartTimer = (timerId) => {
-    const now = Date.now();
-    this.setState({
-      timers: this.state.timers.map((timer) => {
-        if(timer.id === timerId){
-          console.log(timerId);
-          return Object.assign({},timer,{
-            runningSince:now
-            
-          });
-        }else{
-          return timer
-        }
-      })
+     const now = Date.now();
+     this.setState({
+       timers: this.state.timers.map(timer => {
+         if(timer.id === timerId){
+           return Object.assign({}, timer, {
+             runningSince: now
+           })
+         }else return timer;
+       })
+     })
+    startTimerClient({
+      id:timerId,
+      start:Date.now()
     })
+   }
+   handleStopTimer =  (timerId) => {
+     const now = Date.now();
+     this.setState({
+       timers: this.state.timers.map(timer => {
+         
+         if(timer.id === timerId){
+          const delta = (now - timer.runningSince)
+          return Object.assign({}, timer, {
+             elapsed: timer.elapsed + delta,
+             runningSince: null
+           })
+         }else return timer;
+       })
+     })
+   stopTimerClient({
+     id: timerId,
+     stop: Date.now()
+   })
    }
    componentDidMount(){
     this.loadTimersFromServer();
@@ -343,21 +370,6 @@ class TimerDashborad extends Component {
         timers: serverTimers
       })
     ))
-   }
-   handleStopTimer =  (timerId) => {
-    const now = Date.now();
-    this.setState({
-      timers: this.state.timers.map((timer) => {
-        if(timer.id === timerId){
-          return Object.assign({},timer,{
-            elapsed: timer.elapsed + (now - timer.runningSince),
-            runningSince:null
-          })
-        }else{
-          return timer
-        }
-      })
-    })
    }
    //call the backend
    

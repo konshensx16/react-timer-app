@@ -1,30 +1,16 @@
 [
     {
-        "title": "feels great",
+        "title": "feels greatsq",
         "project": "Project",
         "id": "6735aad1-5f0e-476c-9298-04299f9df306",
-        "elapsed": 0,
+        "elapsed": 295270,
         "runningSince": null
     },
     {
-        "title": "Timer",
-        "project": "Project",
-        "id": "7c0d2e17-f8a0-42c6-a8c3-3f20ef12853b",
-        "elapsed": 0,
-        "runningSince": null
-    },
-    {
-        "title": "some push-ups",
-        "project": "workout",
-        "id": "0d6bb561-6174-4eee-b4b3-9b8e880d66be",
-        "elapsed": 0,
-        "runningSince": null
-    },
-    {
-        "title": "some sit-ups",
-        "project": "workout",
-        "id": "0d6bb561-6174-4eee-b4b3-9b8e880d86be",
-        "elapsed": 12001,
+        "title": "New Timer",
+        "project": "Projects",
+        "id": "0bd416c7-997c-465e-bc2e-60cbe9e6148e",
+        "elapsed": 27320,
         "runningSince": null
     }
 ]
