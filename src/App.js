@@ -23,9 +23,6 @@ class ToggleableTimerForm extends Component {
      
    }
    handleFormSubmit = (timer) =>{
-     // TODO: set the timer title and project to some string value so the app doesn't crash
-     timer.title = 'No title';
-     timer.project = 'No description'
      this.props.onFormCreateSubmit(timer);
      this.setState({
        isOpen: false
@@ -75,8 +72,8 @@ class TimerForm extends Component{
   handleFormSubmit = () => {
     this.props.onFormSubmit({
       id: this.props.id || uuid.v4(),
-      title: this.state.title,
-      project: this.state.project
+      title: this.state.title || 'No title',
+      project: this.state.project || 'No project'
     })
   }
   render(){
