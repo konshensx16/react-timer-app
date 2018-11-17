@@ -23,6 +23,10 @@ class ToggleableTimerForm extends Component {
      
    }
    handleFormSubmit = (timer) =>{
+     debugger
+     // TODO: set the timer title and project to some string value so the app doesn't crash
+     timer.title = 'No title';
+     timer.project = 'No description'
      this.props.onFormCreateSubmit(timer);
      this.setState({
        isOpen: false
