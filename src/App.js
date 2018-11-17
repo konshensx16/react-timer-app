@@ -23,7 +23,6 @@ class ToggleableTimerForm extends Component {
      
    }
    handleFormSubmit = (timer) =>{
-     debugger
      // TODO: set the timer title and project to some string value so the app doesn't crash
      timer.title = 'No title';
      timer.project = 'No description'
@@ -92,7 +91,8 @@ class TimerForm extends Component{
                     </label>
                     <input type="text" placeholder="title" className="form-control" 
                     value={this.state.title}
-                    onChange={this.handleChangedTitle}/>
+                    onChange={this.handleChangedTitle} 
+                    required/>
                 </div>
                 <div className="project">
                     <label className = "p-1 mb-2 mt-2 border border-light rounded float-left" >
@@ -100,7 +100,8 @@ class TimerForm extends Component{
                     </label>
                     <input type="text" placeholder="project" className="form-control" 
                     value={this.state.project}
-                    onChange={this.handleChangedProject}/>
+                    onChange={this.handleChangedProject}
+                    required/>
                 </div>
               
               </div>
